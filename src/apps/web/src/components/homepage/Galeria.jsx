@@ -1,4 +1,3 @@
-// src/apps/web/src/components/homepage/Galeria.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import { Camera, Film, Image as ImageIcon, Loader2 } from "lucide-react";
 import { collectionGroup, getDocs } from "firebase/firestore";
@@ -20,7 +19,7 @@ export default function Galeria() {
         setLoading(true);
         setErro("");
 
-        // 🔹 Busca todos os documentos de TODAS as subcoleções "midias"
+        // Busca todos os documentos de TODAS as subcoleções "midias"
         const cg = collectionGroup(firestore, "midias");
         const snap = await getDocs(cg);
         if (cancelado) return;
@@ -38,7 +37,7 @@ export default function Galeria() {
           })
           .filter((m) => !!m.url);
 
-        // 🔹 Ordena em JS pelos mais recentes (criadoEm desc)
+        // Ordena em JS pelos mais recentes (criadoEm desc)
         itens.sort((a, b) => {
           const da =
             a.criadoEm?.toDate?.() instanceof Date
@@ -72,8 +71,7 @@ export default function Galeria() {
   }, []);
 
   // Aplica filtro (todas / imagem / video)
-  const filtradas = useMemo(
-    () =>
+  const filtradas = useMemo(() =>
       midias.filter(
         (m) => tipoFiltro === "todas" || m.tipo === tipoFiltro
       ),
@@ -158,10 +156,6 @@ export default function Galeria() {
           <div className="text-center text-neutral-500 py-16 max-w-lg mx-auto">
             <p className="mb-2">
               Ainda não há fotos ou vídeos cadastrados.
-            </p>
-            <p className="text-sm text-neutral-500">
-              Assim que o salão enviar registros pelos aplicativos
-              administrativos, eles aparecerão aqui automaticamente.
             </p>
           </div>
         )}
